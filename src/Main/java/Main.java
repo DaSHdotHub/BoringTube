@@ -1,5 +1,6 @@
 package Main.java;
-
+import Main.java.tunnel.tunnelPart;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -57,8 +58,60 @@ public class Main {
         /*  First condition: If nearer to exit as to phone, choose phone.
             Second condition: If two phone in equal distance, choose phone which is nearer to exit.
             Third condition: If second condition cannot be made, choose 'Mallorca'
-            Output: 'Barcelona', 'Telefon', 'Mallorca'
+            Output: "Barcelona", "Telefon", "Mallorca"
             */
+        ArrayList<tunnelPart> tunnelPartArrayList = new ArrayList<>();
+        boolean foundExit = false;
+        boolean noPhoneDirectionMallorca = false;
+        boolean noPhoneDirectionBarcelona = false;
+
+        int counterToMallorca = 0;
+        int counterToBarcelona = 0;
+        int phonePositionDirectionMallorca = -1;
+        int phonePositionDirectionBarcelona = -1;
+        String exitDirection;
+        for (int position = 0; position < tunnelParts.length; position++){
+            if (tunnelParts[position] == '-') {
+                while (!foundExit) {
+                    if (tunnelParts[position + counterToMallorca] != 'x' && position + counterToMallorca > 0 && position + counterToMallorca< tunnelParts.length) {
+                        counterToMallorca++;
+                        if (tunnelParts[position + counterToMallorca] == 'x') {
+                            phonePositionDirectionMallorca = position + counterToMallorca;
+                        }
+                        else if (position + counterToMallorca == tunnelParts.length) {
+                            noPhoneDirectionMallorca = true;
+                            
+                        }
+                    }
+                    if (tunnelParts[position + counterToBarcelona] != 'x' && position + counterToBarcelona > 0 && position + counterToBarcelona< tunnelParts.length) {
+                        counterToBarcelona--;
+                        if (tunnelParts[position + counterToBarcelona] == 'x') {
+                            phonePositionDirectionBarcelona = position + counterToMallorca;
+                        }
+                        else if (position + counterToMallorca == 0) {
+                            noPhoneDirectionBarcelona = true;
+                        }
+                    }
+                }
+                if (noPhoneDirectionBarcelona && noPhoneDirectionMallorca && position < (tunnelParts.length)/2 ) {
+                    exitDirection = "Barcelona";
+                } else if (noPhoneDirectionBarcelona && noPhoneDirectionMallorca && position >= (tunnelParts.length)/2) {
+                    exitDirection = "Mallorca";
+                } else if (noPhoneDirectionBarcelona && phonePositionDirectionMallorca >= 0) {
+                    exitDirection = "Telefon";
+                } else if (noPhoneDirectionMallorca && phonePositionDirectionBarcelona >= 0) {
+                    exitDirection = "Telefon";
+                } else if (phonePositionDirectionBarcelona >= 0 && phonePositionDirectionMallorca >= 0) {
+                    if (phonePositionDirectionMallorca - position <= position - phonePositionDirectionBarcelona) {
+                        exitDirection = "Telefon";
+                    } else if (phonePositionDirectionMallorca - position > position - phonePositionDirectionBarcelona) {
+                        exitDirection = "Telefon";
+                    }
+                }
+            }else {
+                exitDirection = "Telefon";
+                }
+            }
 
 
         //Process user input
@@ -80,9 +133,6 @@ public class Main {
             }
         }
         while(aFourthCondition);
-
-
-
 
     }
 

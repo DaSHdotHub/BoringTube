@@ -1,11 +1,8 @@
-package Main.java.tunnel;
+package Main.java.tunnel.Methods;
 
-public class ReadInCharArray implements InputLimits{
-    //Analyze Input
-        /*  First condition: number of signs <= 50000
-            Second condition: number of phone <= 1000
-            Third condition: input parameter 'x' and '-'
-            */
+import Main.java.tunnel.Interface.Limits;
+
+public class GetCharArray implements Limits {
     public static char[] checkUserInput() {
         boolean aFirstCondition = false;
         boolean aSecondCondition = false;
@@ -13,9 +10,9 @@ public class ReadInCharArray implements InputLimits{
         boolean doNotExitLoop = true;
         char[] tunnelParts;
         do {
-            tunnelParts = ReadInString.returnUserInput().toCharArray();
+            tunnelParts = GetInput.UserInputString().toLowerCase().toCharArray();
 
-            if (tunnelParts.length <= InputLimits.numberOfInputCharsLimit) {
+            if (tunnelParts.length <= Limits.numberOfInputCharsLimit) {
                 aFirstCondition = true;
             } else {
                 System.out.println("string has too many values, please try again");
@@ -23,26 +20,26 @@ public class ReadInCharArray implements InputLimits{
 
             int counter = 0;
             for (char aChar : tunnelParts) {
-                if (aChar == InputLimits.phoneChar) counter++;
+                if (aChar == Limits.phoneChar) counter++;
             }
-            if (counter < InputLimits.numberOfInputPhonesLimit) {
+            if (counter < Limits.numberOfInputPhonesLimit) {
                 aSecondCondition = true;
             } else {
-                System.out.println("string has too many " + InputLimits.phoneChar + " values, please try again");
+                System.out.println("string has too many " + Limits.phoneChar + " values, please try again");
             }
             int counterWrongChars = 0;
             for (char aChar : tunnelParts) {
-                if (aChar != InputLimits.phoneChar && aChar != InputLimits.tunnelChar) {
+                if (aChar != Limits.phoneChar && aChar != Limits.tunnelChar) {
                     counterWrongChars++;
                 }
             }
             if (counterWrongChars != 0) {
-                System.out.println("string has wrong input, try " + InputLimits.tunnelChar + " or try " + InputLimits.phoneChar + " for tunnelparts with a phone:");
+                System.out.println("string has wrong input, try " + Limits.tunnelChar + " or try " + Limits.phoneChar + " for tunnelparts with a phone:");
             } else {
                 aThirdCondition = true;
             }
             if (aFirstCondition && aSecondCondition && aThirdCondition){
-                doNotExitLoop = !true;
+                doNotExitLoop = false;
             }
         } while (doNotExitLoop);
         return tunnelParts;

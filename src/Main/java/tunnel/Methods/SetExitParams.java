@@ -28,12 +28,12 @@ public class SetExitParams implements Limits {
                 if (counter == (tunnelPartsList.size() - 1) / 2 && tunnelPartsList.size() / 2 != 0) {
                     //Check if two phones are in equal distance from the middle
                     for (int i = 1; i < counter; i++) {
-                        if (tunnelPartsList.get(counter + i).getType() == Limits.phoneChar && tunnelPartsList.get(counter + i).getType() == Limits.phoneChar) {
-                            tunnelPartsList.set(counter, new tunnelPart(Limits.mallorca));
+                        if (tunnelPartsList.get(counter + i).getType() == Limits.phoneChar && tunnelPartsList.get(counter - i).getType() == Limits.phoneChar) {
+                            tunnelPartsList.set(counter, new tunnelPart(tunnelPartsList.get(counter).getType(),Limits.mallorca));
                         }
                     }
                 } else {
-                    tunnelPartsList.set(counter, new tunnelPart(Limits.phone));
+                    tunnelPartsList.set(counter, new tunnelPart(tunnelPartsList.get(counter).getType(),Limits.phone));
                 }
             }
 
@@ -41,9 +41,9 @@ public class SetExitParams implements Limits {
             //No phones in tunnel
             for(int counter = 1; counter < tunnelPartsList.size() -1; counter++) {
                 if (counter < tunnelPartsList.size() / 2) {
-                    tunnelPartsList.set(counter, new tunnelPart(Limits.barcelona));
+                    tunnelPartsList.set(counter, new tunnelPart(tunnelPartsList.get(counter).getType(),Limits.barcelona));
                 } else {
-                    tunnelPartsList.set(counter, new tunnelPart(Limits.mallorca));
+                    tunnelPartsList.set(counter, new tunnelPart(tunnelPartsList.get(counter).getType(),Limits.mallorca));
                 }
 
             }

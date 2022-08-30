@@ -8,7 +8,7 @@ public class GetAccident {
         do {
             System.out.println("Unfall an Stelle:");
             accident = GetInput.UserInputInt();
-            if (accident < 0 || accident > lengthOfTunnel) {
+            if (accident <= 0 || accident > lengthOfTunnel) {
                 System.out.println("Unfall ausserhalb des Tunnels, weiterer Unfall?");
             } else {
                 aCondition = false;

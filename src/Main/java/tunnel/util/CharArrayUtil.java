@@ -51,6 +51,10 @@ public class CharArrayUtil {
     }
 
     private static boolean validate(boolean condition, String errorMessage) {
-        return true;
+        if (!condition) {
+            System.out.println(errorMessage);
+        }
+
+        return condition;
     }
 }

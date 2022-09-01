@@ -14,9 +14,9 @@ public class CharArrayUtil {
                     .toLowerCase()
                     .toCharArray();
 
-            boolean aFirstCondition = ValidationUtil.validate(CharArrayUtil::computeAFirstCondition, A_FIRST_CONDITION_ERROR_MESSAGE);
-            boolean aSecondCondition = ValidationUtil.validate(CharArrayUtil::computeASecondCondition, A_SECOND_CONDITION_ERROR_MESSAGE);
-            boolean aThirdCondition = ValidationUtil.validate(CharArrayUtil::computeAThirdCondition, A_THIRD_CONDITION_ERROR_MESSAGE);
+            boolean aFirstCondition = validate(computeAFirstCondition(tunnelParts), A_FIRST_CONDITION_ERROR_MESSAGE);
+            boolean aSecondCondition = validate(computeASecondCondition(tunnelParts), A_SECOND_CONDITION_ERROR_MESSAGE);
+            boolean aThirdCondition = validate(computeAThirdCondition(tunnelParts), A_THIRD_CONDITION_ERROR_MESSAGE);
 
             if (aFirstCondition && aSecondCondition && aThirdCondition) {
                 return tunnelParts;
@@ -48,5 +48,9 @@ public class CharArrayUtil {
         }
 
         return counterWrongChars == 0;
+    }
+
+    private static boolean validate(boolean condition, String errorMessage) {
+        return true;
     }
 }
